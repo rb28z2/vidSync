@@ -48,18 +48,21 @@ io.on('connection', function(socket)
 
     if (is_playing)
     {
-      syncObj = setInterval(checkSync, 3000);
+      if (!syncObj)
+        syncObj = setInterval(checkSync, 3000);
     }
     else
     {
+      console.log("Stopping sync check");
       clearInterval(syncObj);
+      syncObj = null;
     }
 
   });
 
   socket.on('new_url', function(data)
   {
-    socket.emit('new_url', data);
+    io.sockets.emit('new_url', data);
   })
 
   socket.on("updateTime", function(data)
@@ -80,4 +83,10 @@ http.listen(80, function()
 function checkSync()
 {
   console.log("Checking Sync");
+  var smallestPlayed = 0;
+  var clients = Object.keys(io.sockets.sockets);
+  for (var i = 0; i < playData.length; i++)
+  {
+    smallestPlayed = playData[clients[i]];
+  }
 }

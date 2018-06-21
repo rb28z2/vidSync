@@ -12,25 +12,6 @@ function updateTime()
 var player;
 var intervalObj;
 $(document).ready(function() {
-  player = videojs('my-video');
-
-  player.on('ready', function()
-  {
-    socket.emit('browser', "PLAYER READY");
-  });
-
-  player.on("play", function()
-  {
-    socket.emit('play_state_change', 'play');
-    intervalObj = setInterval(updateTime, 2000);
-  });
-
-  player.on("pause", function()
-  {
-    socket.emit('play_state_change', 'pause');
-    clearInterval(intervalObj);
-  });
-
   $("form").submit(function(event)
   {
     event.preventDefault();
@@ -59,6 +40,26 @@ socket.on('connect', function()
 
   socket.on('new_url', function(data)
   {
+    console.log("New URL Recieved: %s", data);
+    player = videojs('my-video');
     player.src(data);
+    player.ready(function()
+    {
+      socket.emit('browser', "PLAYER READY");
+      
+      player.on("play", function()
+      {
+        console.log("Starting Playback");
+        socket.emit('play_state_change', 'play');
+        intervalObj = setInterval(updateTime, 2000);
+      });
+
+      player.on("pause", function()
+      {
+        socket.emit('play_state_change', 'pause');
+        clearInterval(intervalObj);
+      });
+    })
+    console.log(player);
   })
 });
