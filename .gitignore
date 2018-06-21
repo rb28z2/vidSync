@@ -1,0 +1,4 @@
+node_modules/
+config.js
+*.pem
+data.json*

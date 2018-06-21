@@ -1,0 +1,83 @@
+var express = require('express');
+
+console.log("Starting");
+
+const app = express();
+app.use(express.static("assets"));
+
+var http = require('http')
+  .Server(app);
+
+console.log("Initializing socket.io");
+var io = require('socket.io')(http);
+
+
+app.get('/', function(req, res)
+{
+  res.sendFile(__dirname + "/index.html");
+});
+
+var playData = {};
+var is_playing = false;
+var syncObj;
+
+io.on('connection', function(socket)
+{
+  console.log("Socket connection established. ID: ", socket.id);
+  socket.emit("Init", "Connected!");
+
+  socket.on('browser', function(data)
+  {
+    console.log(data);
+  });
+
+  socket.on('play_state_change', function(data)
+  {
+    if (data == "play")
+    {
+      console.log("PLAYING");
+      socket.broadcast.emit('play_state', "play");
+      is_playing = true;
+    }
+    else if (data == "pause")
+    {
+      console.log("PAUSING");
+      socket.broadcast.emit('play_state', "pause");
+      is_playing = false;
+    }
+
+    if (is_playing)
+    {
+      syncObj = setInterval(checkSync, 3000);
+    }
+    else
+    {
+      clearInterval(syncObj);
+    }
+
+  });
+
+  socket.on('new_url', function(data)
+  {
+    socket.emit('new_url', data);
+  })
+
+  socket.on("updateTime", function(data)
+  {
+    playData[socket.id] = data;
+  })
+
+
+  socket.on('disconnect', function(socket){
+  })
+});
+
+http.listen(80, function()
+{
+  console.log("Listen on port %s in HTTP mode", 80);
+});
+
+function checkSync()
+{
+  console.log("Checking Sync");
+}

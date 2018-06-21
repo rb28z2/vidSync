@@ -1,0 +1,9 @@
+{
+  "name": "vidSync",
+  "version": "0.0.1",
+  "description": "Sync Video",
+  "dependencies": {
+    "express": "^4.16.3",
+    "socketio": "^1.0.0"
+  }
+}
