@@ -2,6 +2,11 @@ var socket = io();
 
 console.log("Starting");
 
+var myIP = $.getJSON('https://api.ipify.org', function(data)
+{
+  console.log("My IP:", data);
+})
+
 socket.emit('browser', "This is browser");
 
 function updateTime()
@@ -46,7 +51,7 @@ socket.on('connect', function()
     player.ready(function()
     {
       socket.emit('browser', "PLAYER READY");
-      
+
       player.on("play", function()
       {
         console.log("Starting Playback");
