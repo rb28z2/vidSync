@@ -60,6 +60,10 @@ io.on('connection', function(socket)
     }
 
   });
+  
+  socket.on('partner_update_push', function(data){
+	 socket.broadcast.emit('partner_update', data); 
+  });
 
   socket.on('new_url', function(data)
   {
