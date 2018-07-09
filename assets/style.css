@@ -5,8 +5,13 @@ body {
 
 #hello {
   color: gray;
+  margin-bottom: 10px;
+}
+
+#video {
+	margin: 10px;
 }
 
 .info {
-  color: gray;  
+  color: #bbbbbb;  
 }
