@@ -2,12 +2,13 @@ var socket = io();
 
 console.log("Starting");
 
-var myIP = $.getJSON('https://api.ipify.org', function(data)
+var myIP = $.getJSON('http://ip4.seeip.org/json', function(data)
 {
-  console.log("My IP:", data);
+  console.log("My IP:", data.ip);
+  socket.emit("browser", data.ip);
 })
 
-socket.emit('browser', "This is browser");
+//socket.emit('browser', "This is browser");
 
 function updateTime()
 {
