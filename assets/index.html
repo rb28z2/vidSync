@@ -10,12 +10,17 @@
 
 <body>
 <span id="hello">Hello! This is all sorts of terrible. I'm sorry.</span>
-<video id="my-video" class="video-js" controls preload="auto" data-setup="{}">
+<video id="my-video" class="video-js" data-setup='{"controls": true, "autoplay": false, "preload": "auto"}'>
   <source src="" type="video/mp4"
   <p class="vjs-no-js">
     Please enable JS
   </p>
 </video>
+<p id="video_details" class="info">
+  Progress: <span id="currentTime">0</span> / <span id="duration">0</span> (<span id="progressPercent">0</span>)
+  <br />
+  Buffered: <span id="buffered">0</span> (<span id="bufferedSeconds">0</span>)
+</p>
 <p>
   <form action="">
     <input type="text" name="url" value="" id="url_field">

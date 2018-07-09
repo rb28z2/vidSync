@@ -23,13 +23,14 @@ var syncObj;
 
 io.on('connection', function(socket)
 {
-  console.log("Socket connection established. ID: ", socket.id, "IP: ", socket.handshake.address);
-  socket.emit("Init", "Connected!");
 
-  socket.on('browser', function(data)
-  {
+  socket.on('browser-connect', function(data){
+    console.log("Client connected with ID:", socket.id, "IP:", data)
+  })
+
+  socket.on('browser', function(data){
     console.log(data);
-  });
+  })
 
   socket.on('play_state_change', function(data)
   {
