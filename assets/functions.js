@@ -53,14 +53,7 @@ socket.on('connect', function()
     playerReady();
     playerPlay();
     playerPause();
-  });
-  
-  socket.on('partner_update', function(data){
-	  $('#currentTime_other').text(data.current_time + "s");
-	  $('#progressPercent_other').text(data.progress_percent + "%")
-	  $('#buffered_other').text(data.buffered_percent + "%");
-	  $('#bufferedSeconds_other').text(data.buffered_seconds + "s");
-  });
+  })
 });
 
 function playerReady(){
@@ -88,25 +81,14 @@ function playerPause(){
 
 function updateBufferedPercent(duration_set) // TODO: rename to something more generic
 {
-  buffered_percent = (player.bufferedPercent()*100).toFixed(2);
-  $('#buffered').text( buffered_percent + "%");
-  
-  buffered_seconds = player.bufferedEnd().toFixed(0)
-  $('#bufferedSeconds').text(buffered_seconds + "s");
- 
-  current_time = player.currentTime().toFixed(0);
-  $('#currentTime').text(current_time + "s");
-  
+  $('#buffered').text((player.bufferedPercent()*100).toFixed(2) + "%");
+  $('#bufferedSeconds').text(player.bufferedEnd().toFixed(0) + "s");
+  $('#currentTime').text(player.currentTime().toFixed(0) + "s");
   progress = ((player.currentTime() / player.duration())*100).toFixed(2);
   $('#progressPercent').text(progress + "%");
   if (!duration_set)
   {
-    $('.duration').text(player.duration().toFixed(0))
+    $('#duration').text(player.duration())
     duration_set = true;
   }
-  
-  progress_data = {buffered_percent: buffered_percent, buffered_seconds: buffered_seconds, current_time: current_time,
-  progress_percent: progress};
-  
-  socket.emit('partner_update_push', progress_data);
 }
