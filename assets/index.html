@@ -10,9 +10,9 @@
 
 <body>
 <div id="hello">Hello! List of things that are broken: yes</div>
-<div id="video-container">
+<div id="video-container" class="ui-widget-container">
   <div id="video">
-  	<video id="my-video" class="video-js" data-setup='{"controls": true, "autoplay": false, "preload": "auto"}'>
+  	<video id="my-video" class="video-js" data-setup='{"controls": true, "autoplay": false, "preload": "auto", "fluid": true}'>
   	  <source src="" type="video/mp4"
   	  <p class="vjs-no-js">
   		Please enable JS
@@ -40,6 +40,8 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="functions.js"></script>
 <script src="https://vjs.zencdn.net/7.0.3/video.js"></script>
 

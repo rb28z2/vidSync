@@ -8,11 +8,22 @@ body {
   margin-bottom: 10px;
 }
 
+#video-container {
+  padding: 10px;
+  width: 85%;
+  margin-left: -20px;
+  max-width: 100%
+}
+
+.ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se {
+  background-color: mediumpurple;
+}
+
 #video {
 	margin: 10px;
 }
 
 .video_details {
-  color: #bbbbbb;  
+  color: #bbbbbb;
   margin-top: 15px;
 }

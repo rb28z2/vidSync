@@ -25,6 +25,10 @@ $(document).ready(function() {
     url = $("#url_field").val();
     socket.emit("new_url", url);
     console.log(url);
+  });
+
+  $("#video-container").resizable({
+    aspectRatio: 16/9
   })
 });
 
@@ -54,7 +58,7 @@ socket.on('connect', function()
     playerPlay();
     playerPause();
   });
-  
+
   socket.on('partner_update', function(data){
 	  $('#currentTime_other').text(data.current_time + "s");
 	  $('#progressPercent_other').text(data.progress_percent + "%")
@@ -90,13 +94,13 @@ function updateBufferedPercent(duration_set) // TODO: rename to something more g
 {
   buffered_percent = (player.bufferedPercent()*100).toFixed(2);
   $('#buffered').text( buffered_percent + "%");
-  
+
   buffered_seconds = player.bufferedEnd().toFixed(0)
   $('#bufferedSeconds').text(buffered_seconds + "s");
- 
+
   current_time = player.currentTime().toFixed(0);
   $('#currentTime').text(current_time + "s");
-  
+
   progress = ((player.currentTime() / player.duration())*100).toFixed(2);
   $('#progressPercent').text(progress + "%");
   if (!duration_set)
@@ -104,9 +108,9 @@ function updateBufferedPercent(duration_set) // TODO: rename to something more g
     $('.duration').text(player.duration().toFixed(0))
     duration_set = true;
   }
-  
+
   progress_data = {buffered_percent: buffered_percent, buffered_seconds: buffered_seconds, current_time: current_time,
   progress_percent: progress};
-  
+
   socket.emit('partner_update_push', progress_data);
 }
