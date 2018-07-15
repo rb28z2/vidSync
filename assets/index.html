@@ -10,13 +10,15 @@
 
 <body>
 <div id="hello">Hello! List of things that are broken: yes</div>
-<div id="video">
-	<video id="my-video" class="video-js" data-setup='{"controls": true, "autoplay": false, "preload": "auto"}'>
-	  <source src="" type="video/mp4"
-	  <p class="vjs-no-js">
-		Please enable JS
-	  </p>
-	</video>
+<div id="video-container">
+  <div id="video">
+  	<video id="my-video" class="video-js" data-setup='{"controls": true, "autoplay": false, "preload": "auto"}'>
+  	  <source src="" type="video/mp4"
+  	  <p class="vjs-no-js">
+  		Please enable JS
+  	  </p>
+  	</video>
+  </div>
 </div>
 <div id="video_details_me" class="video_details" >Me:
   <div>Progress: <span id="currentTime">0</span> / <span class="duration">0</span> (<span id="progressPercent">0</span>)</div>
