@@ -71,6 +71,10 @@ io.on('connection', function(socket)
     playData[socket.id] = data;
   })
 
+  socket.on("partner_update_push", function(data){
+    socket.broadcast.emit("partner_update", data); // send progress info to everyone except sender
+  })
+
 
   socket.on('disconnect', function(socket){
   })
