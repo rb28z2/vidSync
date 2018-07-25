@@ -17,6 +17,11 @@ app.get('/', function(req, res)
   res.sendFile(__dirname + "/index.html");
 });
 
+app.get('/subs.vtt', function(req, res)
+{
+  res.sendFile("/subs.vtt");
+})
+
 var playData = {};
 var is_playing = false;
 var syncObj;
@@ -63,7 +68,16 @@ io.on('connection', function(socket)
 
   socket.on('new_url', function(data)
   {
-    io.sockets.emit('new_url', data);
+    videoObject = `<div id="video">
+    	<video id="my-video" class="video-js" data-setup='{"controls": true, "autoplay": false, "preload": "auto", "fluid": true}'>
+    	  <source src="${data}" type="video/mp4" />
+        <track src="subs.vtt" kind="captions" srclang="en" label="English" default>
+    	  <p class="vjs-no-js">
+    		Please enable JS
+    	  </p>
+    	</video>
+    </div>`
+    io.sockets.emit('new_url', videoObject);
   })
 
   socket.on("updateTime", function(data)
