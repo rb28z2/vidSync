@@ -51,8 +51,10 @@ socket.on('connect', function()
   socket.on('new_url', function(data)
   {
     console.log("New URL Recieved: %s", data);
+    vid_div = $("#video-container");
+    vid_div.html(data);
     player = videojs('my-video');
-    player.src(data);
+    //player.src(data);
     console.log(player);
     playerReady();
     playerPlay();
