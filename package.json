@@ -4,6 +4,7 @@
   "description": "Sync Video",
   "dependencies": {
     "express": "^4.16.3",
+    "opensubtitles-api": "^4.1.0",
     "socketio": "^1.0.0"
   }
 }

@@ -3,3 +3,4 @@ config.js
 *.pem
 data.json*
 *.vtt
+config.js
