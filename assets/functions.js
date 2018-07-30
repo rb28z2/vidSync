@@ -2,7 +2,7 @@ var socket = io();
 
 console.log("Starting");
 
-var myIP = $.getJSON('http://ip4.seeip.org/json', function(data)
+$.getJSON('http://ip4.seeip.org/json', function(data)
 {
   console.log("My IP:", data.ip);
   socket.emit("browser-connect", data.ip);
@@ -18,7 +18,7 @@ function updateTime()
 var player;
 var intervalObj;
 $(document).ready(function() {
-  $("form").submit(function(event)
+  $("#url_form").submit(function(event)
   {
     event.preventDefault();
     console.log("submitted");
@@ -26,6 +26,21 @@ $(document).ready(function() {
     socket.emit("new_url", url);
     console.log(url);
   });
+
+  $("#subtitle_form").submit(function(event){
+    event.preventDefault();
+    console.log("Requesting new subtitles");
+
+    request = {
+      title: $("#title_field").val(),
+      season: $("#season_field").val(),
+      episode:  $("#episode_field").val()
+    };
+
+    socket.emit("subtitle_request", request);
+    $("#load_subs").val("Getting options...");
+    $("#load_subs").attr("disabled", true);
+  })
 
   $("#video-container").resizable({
     aspectRatio: 16/9

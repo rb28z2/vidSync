@@ -21,12 +21,18 @@ const OpenSubtitles = new OS({
   ssl: true
 });
 
-var subs = OpenSubtitles.search({
-  sublanguageid: 'eng',
-  season: '2',
-  episode: '7',
-  imdbid: 'tt1837576',
-  limit: 'all'
-}).then(subtitles => {
-  console.log(subtitles);
-})
+function getSubs(title, season, episode) {
+  OpenSubtitles.search({
+    sublanguageid: 'eng',
+    season: '2',
+    episode: '7',
+    //imdbid: 'tt1837576',
+    query: 'Scandal',
+    limit: 'all'
+  }).then(subtitles => {
+    console.log(subtitles);
+    return subtitles;
+  })
+}
+
+module.exports = getSubs;

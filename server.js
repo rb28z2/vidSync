@@ -78,6 +78,12 @@ io.on('connection', function(socket)
     	</video>
     </div>`
     io.sockets.emit('new_url', videoObject);
+  });
+
+  socket.on('subtitle_request', function(data){
+    console.log("Subtitles requested for: %s s%de%d", data.title, data.season, data.episode);
+    var subRequester = require('./autosubs');
+    var subs = new subRequester(data.title, data.season, data.episode);
   })
 
   socket.on("updateTime", function(data)
@@ -96,7 +102,7 @@ io.on('connection', function(socket)
 
 http.listen(80, function()
 {
-  console.log("Listen on port %s in HTTP mode", 80);
+  console.log("Listening on port %s in HTTP mode", 80);
 });
 
 function checkSync()

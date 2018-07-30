@@ -27,3 +27,19 @@ body {
   color: #bbbbbb;
   margin-top: 15px;
 }
+
+#video_details_me {
+  display: none;
+}
+
+#episode_field {
+  width: 50px
+}
+
+#season_field {
+  width: 50px
+}
+
+#subtitle_form {
+  color: #bbbbbb
+}
