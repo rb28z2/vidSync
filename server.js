@@ -1,4 +1,7 @@
 var express = require('express');
+var download = require('download-file');
+var srt2vtt = require('srt-to-vtt')
+var fs = require('fs');
 
 console.log("Starting");
 
@@ -25,6 +28,7 @@ app.get('/subs.vtt', function(req, res)
 var playData = {};
 var is_playing = false;
 var syncObj;
+var subtitles_list;
 
 io.on('connection', function(socket)
 {
@@ -78,6 +82,35 @@ io.on('connection', function(socket)
     	</video>
     </div>`
     io.sockets.emit('new_url', videoObject);
+  });
+
+  socket.on('subtitle_request', function(data){
+    console.log("Subtitles requested for: %s s%de%d", data.title, data.season, data.episode);
+    var subRequester = require('./autosubs');
+    new subRequester(data.title, data.season, data.episode).then(function(data){
+      console.log("Subtitles retrieved successfully");
+      io.sockets.emit('subtitle_listing', data.en);
+      subtitles_list = data.en
+    });
+  })
+
+  socket.on('selected_subtitle', function(data){
+    var selected = subtitles_list[data];
+    var url = selected.url;
+    var options = {
+      directory: "./assets/",
+      filename: "subs.srt"
+    };
+
+    download(url, options, function(err){
+      if (err) throw err;
+    })
+    console.log("Downloaded %s successfully as %s in %s", data.filename, options.filename, options.directory);
+    console.log("Converting to VTT");
+    fs.createReadStream('./assets/subs.srt')
+      .pipe(srt2vtt())
+      .pipe(fs.createWriteStream('./assets/subs.vtt'));
+    console.log("Conversion complete");
   })
 
   socket.on("updateTime", function(data)
@@ -91,12 +124,13 @@ io.on('connection', function(socket)
 
 
   socket.on('disconnect', function(socket){
+    //socket.broadcast.emit("play_state", "pause");
   })
 });
 
 http.listen(80, function()
 {
-  console.log("Listen on port %s in HTTP mode", 80);
+  console.log("Listening on port %s in HTTP mode", 80);
 });
 
 function checkSync()

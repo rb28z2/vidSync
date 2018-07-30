@@ -27,3 +27,37 @@ body {
   color: #bbbbbb;
   margin-top: 15px;
 }
+
+#video_details_me {
+  display: none;
+}
+
+#episode_field {
+  width: 50px
+}
+
+#season_field {
+  width: 50px
+}
+
+#subtitle_form {
+  color: #bbbbbb
+}
+
+#subtitle_list {
+  color: #bbbbbb;
+  margin-top: 15px;
+}
+
+.subtitle_item {
+  background: rgb(78,78,78);
+  background: linear-gradient(90deg, rgba(78,78,78,1) 0%, rgba(78,78,78,0.6) 30%, rgba(78,78,78,0) 100%);
+  margin-top: 7px;
+  padding: 3px;
+}
+
+.subtitle_item:hover {
+  background: #58709a;
+  color: cyan;
+  cursor: pointer;
+}

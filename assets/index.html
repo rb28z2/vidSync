@@ -11,7 +11,7 @@
 <body>
 <div id="hello">Hello! List of things that are broken: yes</div>
 <div id="video-container" class="ui-widget-container">
-  
+
 </div>
 <div id="video_details_me" class="video_details" >Me:
   <div>Progress: <span id="currentTime">0</span> / <span class="duration">0</span> (<span id="progressPercent">0</span>)</div>
@@ -22,12 +22,23 @@
   <div>Buffered: <span id="buffered_other">0</span> (<span id="bufferedSeconds_other">0</span>)</div>
 </div>
 <p>
-  <form action="">
+  <form action="" id="url_form">
     <input type="text" name="url" value="" id="url_field">
     <input type="submit" value="Load" id="submit_url">
   </form>
-
 </p>
+
+<div id="getSubs">
+  <form action="" id="subtitle_form">
+    Name: <input type="text", name="title", value="", id="title_field"><br />
+    Season: <input type="number", name="season", value="", id="season_field"><br />
+    Episode: <input type="number", name="episode", value="", id="episode_field"><br />
+    <input type="submit", value="Load Subtitles", id="load_subs">
+</form>
+</div>
+<div id="subtitle_list">
+  
+</div>
 </body>
 
 

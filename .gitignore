@@ -3,3 +3,5 @@ config.js
 *.pem
 data.json*
 *.vtt
+*.srt
+config.js

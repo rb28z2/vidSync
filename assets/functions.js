@@ -2,7 +2,7 @@ var socket = io();
 
 console.log("Starting");
 
-var myIP = $.getJSON('http://ip4.seeip.org/json', function(data)
+$.getJSON('http://ip4.seeip.org/json', function(data)
 {
   console.log("My IP:", data.ip);
   socket.emit("browser-connect", data.ip);
@@ -18,7 +18,7 @@ function updateTime()
 var player;
 var intervalObj;
 $(document).ready(function() {
-  $("form").submit(function(event)
+  $("#url_form").submit(function(event)
   {
     event.preventDefault();
     console.log("submitted");
@@ -27,8 +27,29 @@ $(document).ready(function() {
     console.log(url);
   });
 
+  $("#subtitle_form").submit(function(event){
+    event.preventDefault();
+    console.log("Requesting new subtitles");
+
+    request = {
+      title: $("#title_field").val(),
+      season: $("#season_field").val(),
+      episode:  $("#episode_field").val()
+    };
+
+    socket.emit("subtitle_request", request);
+    $("#load_subs").val("Getting options...");
+    $("#load_subs").attr("disabled", true);
+  })
+
   $("#video-container").resizable({
     aspectRatio: 16/9
+  })
+
+  $("#subtitle_list").on('click', "div.subtitle_item", function(){
+    var sub_index = $(this).data().index;
+    socket.emit('selected_subtitle', sub_index);
+    $(this).css({"background": "#272727", "color": "#565656"});
   })
 });
 
@@ -60,6 +81,21 @@ socket.on('connect', function()
     playerPlay();
     playerPause();
   });
+
+  socket.on('subtitle_listing', function(data){
+    console.log("Retrieved Subtitles");
+    var listingDiv = $("#subtitle_list");
+    for (var i = 0; i < data.length; i++){
+      var toAppend = `<div id="subtitle${i}" class="subtitle_item">${data[i].filename}</div>`
+      //toAppend.data("index", i);
+      console.log(toAppend);
+      //$(toAppend).appendTo(listingDiv)
+      var appended = listingDiv.append(toAppend).children().last();
+      appended.data("index", i);
+    }
+    $("#load_subs").val("Load Subtitles");
+    $("#load_subs").attr("disabled", false);
+  })
 
   socket.on('partner_update', function(data){
 	  $('#currentTime_other').text(data.current_time + "s");
