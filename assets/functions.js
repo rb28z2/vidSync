@@ -45,6 +45,11 @@ $(document).ready(function() {
   $("#video-container").resizable({
     aspectRatio: 16/9
   })
+
+  $("#subtitle_list").on('click', "div.subtitle_item", function(){
+    var sub_index = $(this).data().index;
+    socket.emit('selected_subtitle', sub_index);
+  })
 });
 
 socket.on('connect', function()
@@ -75,6 +80,20 @@ socket.on('connect', function()
     playerPlay();
     playerPause();
   });
+
+  socket.on('subtitle_listing', function(data){
+    console.log("Retrieved Subtitles");
+    var listingDiv = $("#subtitle_list");
+    for (var i = 0; i < data.length; i++){
+      var toAppend = `<div id="subtitle${i}" class="subtitle_item">${data[i].filename}</div>`
+      //toAppend.data("index", i);
+      console.log(toAppend);
+      //$(toAppend).appendTo(listingDiv)
+      listingDiv.append(toAppend).children().last().data("index", i);;
+    }
+    $("#load_subs").val("Load Subtitles");
+    $("#load_subs").attr("disabled", false);
+  })
 
   socket.on('partner_update', function(data){
 	  $('#currentTime_other').text(data.current_time + "s");

@@ -3,8 +3,10 @@
   "version": "0.0.1",
   "description": "Sync Video",
   "dependencies": {
+    "download-file": "^0.1.5",
     "express": "^4.16.3",
     "opensubtitles-api": "^4.1.0",
-    "socketio": "^1.0.0"
+    "socketio": "^1.0.0",
+    "srt-to-vtt": "^1.1.2"
   }
 }
