@@ -106,11 +106,11 @@ io.on('connection', function(socket)
       if (err) throw err;
     })
     console.log("Downloaded %s successfully as %s in %s", data.filename, options.filename, options.directory);
-
+    console.log("Converting to VTT");
     fs.createReadStream('./assets/subs.srt')
       .pipe(srt2vtt())
-      .pipe(fs.createWriteStream('./assets/subs.vtt'))
-
+      .pipe(fs.createWriteStream('./assets/subs.vtt'));
+    console.log("Conversion complete");
   })
 
   socket.on("updateTime", function(data)

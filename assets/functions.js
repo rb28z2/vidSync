@@ -49,6 +49,7 @@ $(document).ready(function() {
   $("#subtitle_list").on('click', "div.subtitle_item", function(){
     var sub_index = $(this).data().index;
     socket.emit('selected_subtitle', sub_index);
+    $(this).css({"background": "#272727", "color": "#565656"});
   })
 });
 
@@ -89,7 +90,8 @@ socket.on('connect', function()
       //toAppend.data("index", i);
       console.log(toAppend);
       //$(toAppend).appendTo(listingDiv)
-      listingDiv.append(toAppend).children().last().data("index", i);;
+      var appended = listingDiv.append(toAppend).children().last();
+      appended.data("index", i);
     }
     $("#load_subs").val("Load Subtitles");
     $("#load_subs").attr("disabled", false);
