@@ -51,6 +51,17 @@ $(document).ready(function() {
     aspectRatio: 16/9
   })
 
+  $("#get_current_time").on('click', function() {
+    var time = player.currentTime().toFixed(0);
+    $("#current_time_input").val(time);
+  });
+
+  $("#sync_now").on('click', function(){
+    player.pause();
+    var time = $("#current_time_input").val();
+    socket.emit('jump_to_time', time);
+  });
+
   $("#subtitle_list").on('click', "div.subtitle_item", function(){
     var sub_index = $(this).data().index;
     socket.emit('selected_subtitle', sub_index);
@@ -90,6 +101,11 @@ socket.on('connect', function()
     playerPlay();
     playerPause();
   });
+
+  socket.on('jump_to_time', function(data){
+    console.log("Jumping to time %s", data);
+    player.currentTime(data);
+  })
 
   socket.on('subtitle_listing', function(data){
     console.log("Retrieved Subtitles");

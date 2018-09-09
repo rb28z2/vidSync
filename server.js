@@ -113,6 +113,10 @@ io.on('connection', function(socket)
     socket.emit('new_url', videoObject);
   })
 
+  socket.on('jump_to_time', function(data){
+    io.sockets.emit('jump_to_time', data);
+  })
+
   socket.on("updateTime", function(data)
   {
     playData[socket.id] = data;

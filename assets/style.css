@@ -23,6 +23,15 @@ body {
 	margin: 10px;
 }
 
+#video_controls {
+  width: 30%;
+}
+
+#sync_block {
+  float: right;
+  width: 37%;
+}
+
 .video_details {
   color: #bbbbbb;
   margin-top: 15px;

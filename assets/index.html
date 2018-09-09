@@ -4,49 +4,59 @@
 <head>
   <link href="https://vjs.zencdn.net/7.0.3/video-js.css" rel="stylesheet">
   <title>Video Sync</title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-<div id="hello">Hello! List of things that are broken: yes</div>
-<div id="video-container" class="ui-widget-container">
-
-</div>
-<div id="video_details_me" class="video_details" >Me:
-  <div>Progress: <span id="currentTime">0</span> / <span class="duration">0</span> (<span id="progressPercent">0</span>)</div>
-  <div>Buffered: <span id="buffered">0</span> (<span id="bufferedSeconds">0</span>)</div>
-</div>
-<div id="load_last_div">
-  <div>
-    <button type="button" class="btn btn-primary" id="load_last_video">Load Last Video</button>
+  <div id="hello">Hello! List of things that are broken: yes</div>
+  <div id="video-container" class="ui-widget-container"></div>
+  <div id="video_details_me" class="video_details">Me:
+    <div>Progress: <span id="currentTime">0</span> / <span class="duration">0</span> (<span id="progressPercent">0</span>)</div>
+    <div>Buffered: <span id="buffered">0</span> (<span id="bufferedSeconds">0</span>)</div>
   </div>
-</div>
-<div id="video_details_other" class="video_details">Not me:
-  <div>Progress: <span id="currentTime_other">0</span> / <span class="duration">0</span> (<span id="progressPercent_other">0</span>)</div>
-  <div>Buffered: <span id="buffered_other">0</span> (<span id="bufferedSeconds_other">0</span>)</div>
-</div>
-<p>
-  <form action="" id="url_form">
-    <input type="text" name="url" value="" id="url_field">
-    <button type="submit" class="btn btn-primary" id="submit_url">Load</button>
-  </form>
-</p>
+  <div id="video_controls">
 
-<div id="getSubs">
-  <form action="" id="subtitle_form">
-    <div class="form-group">
-    Name: <input type="text", name="title", value="", id="title_field"><br />
+    <span>
+      <button type="button" class="btn btn-primary" id="load_last_video">Load Last Video</button>
+    </span>
+
+    <div class="input-group mb-3" id="sync_block">
+      <div class="input-group-prepend">
+        <button class="btn btn-outline-secondary" type="button" id="get_current_time">Now</button>
+      </div>
+      <input type="number" class="form-control" placeholder="" id="current_time_input">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" id="sync_now">Sync</button>
+      </div>
+    </div>
+
+</div>
+  <div id="video_details_other" class="video_details">Not me:
+    <div>Progress: <span id="currentTime_other">0</span> / <span class="duration">0</span> (<span id="progressPercent_other">0</span>)</div>
+    <div>Buffered: <span id="buffered_other">0</span> (<span id="bufferedSeconds_other">0</span>)</div>
+  </div>
+  <p>
+    <form action="" id="url_form">
+      <input type="text" name="url" value="" id="url_field">
+      <button type="submit" class="btn btn-primary" id="submit_url">Load</button>
+    </form>
+  </p>
+
+  <div id="getSubs">
+    <form action="" id="subtitle_form">
+      <div class="form-group">
+        Name: <input type="text", name="title", value="", id="title_field"><br />
     Season: <input type="number", name="season", value="", id="season_field"><br />
     Episode: <input type="number", name="episode", value="", id="episode_field"><br />
-    <button type="submit" class="btn btn-primary" id="load_subs">Load Subtitles</button>
+        <button type="submit" class="btn btn-primary" id="load_subs">Load Subtitles</button>
+      </div>
+    </form>
   </div>
-</form>
-</div>
-<div id="subtitle_list">
+  <div id="subtitle_list">
 
-</div>
+  </div>
 </body>
 
 
