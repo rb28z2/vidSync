@@ -2,89 +2,90 @@
 <html>
 
 <head>
-  <link href="https://vjs.zencdn.net/7.0.3/video-js.css" rel="stylesheet">
-  <title>Video Sync</title>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="style.css">
+    <link href="https://vjs.zencdn.net/7.0.3/video-js.css" rel="stylesheet">
+    <title>Video Sync</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div id="outer_container">
+    <div id="outer_container">
 
-    <div class="alert alert-info" role="alert" id="primary_alert">
-      A simple primary alert—check it out!
-    </div>
-
-    <div id="hello">Hello! List of things that are broken: yes</div>
-    <div id="video-container" class="ui-widget-container"></div>
-    <div id="video_details_me" class="video_details">Me:
-      <div>Progress: <span id="currentTime">0</span> / <span class="duration">0</span> (<span id="progressPercent">0</span>)</div>
-      <div>Buffered: <span id="buffered">0</span> (<span id="bufferedSeconds">0</span>)</div>
-    </div>
-    <div id="video_controls">
-
-      <div>
-      <button type="button" class="btn btn-primary" id="load_last_video">Load Last Video</button>
-    </div>
-
-      <div class="input-group mb-3" id="sync_block">
-        <div class="input-group-prepend">
-          <button class="btn btn-outline-info" type="button" id="get_current_time">Now</button>
-        </div>
-        <input type="number" class="form-control" placeholder="" id="current_time_input">
-        <div class="input-group-append">
-          <button class="btn btn-success" type="button" id="sync_now">Sync</button>
+        <div class="alert alert-info" role="alert" id="primary_alert">
+            A simple primary alert—check it out!
         </div>
 
-      </div>
-  <div class="badge badge-secondary" id="sync_badge">Synced!</div>
-    </div>
+        <div id="hello">Hello! List of things that are broken: yes</div>
 
-    <div id="video_details_other" class="video_details">Not me:
-      <div>Progress: <span id="currentTime_other">0</span> / <span class="duration">0</span> (<span id="progressPercent_other">0</span>)</div>
-      <div>Buffered: <span id="buffered_other">0</span> (<span id="bufferedSeconds_other">0</span>)</div>
-    </div>
-
-    <div id="load_url_div">
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="URL" name="url" value="" id="url_field">
-        <div class="input-group-append">
-          <button class="btn btn-success" type="button" id="submit_url">Load</button>
+        <div id="video-container" class="ui-widget-container"></div>
+        
+        <div id="video_details_me" class="video_details">Me:
+            <div>Progress: <span id="currentTime">0</span> / <span class="duration">0</span> (<span id="progressPercent">0</span>)</div>
+            <div>Buffered: <span id="buffered">0</span> (<span id="bufferedSeconds">0</span>)</div>
         </div>
-      </div>
-    </div>
 
-    <div id="get_subs">
-        <div class="form-group">
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Name</span>
+        <div id="video_controls">
+            <div>
+                <button type="button" class="btn btn-primary" id="load_last_video">Load Last Video</button>
             </div>
-            <input type="text"  autocomplete='on' class="form-control" id="title_field">
-          </div>
 
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Season</span>
-            </div>
-            <input type="number" class="form-control" id="season_field">
-          </div>
+            <div class="input-group mb-3" id="sync_block">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-info" type="button" id="get_current_time">Now</button>
+                </div>
+                <input type="number" class="form-control" placeholder="" id="current_time_input">
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="button" id="sync_now">Sync</button>
+                </div>
 
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Episode</span>
             </div>
-            <input type="number" class="form-control" id="episode_field">
-          </div>
-          <button type="submit" class="btn btn-primary" id="load_subs">Load Subtitles</button>
+            <div class="badge badge-secondary" id="sync_badge">Synced!</div>
         </div>
-    </div>
 
-    <div id="subtitle_list"></div>
-  </div>
+        <div id="video_details_other" class="video_details">Not me:
+            <div>Progress: <span id="currentTime_other">0</span> / <span class="duration">0</span> (<span id="progressPercent_other">0</span>)</div>
+            <div>Buffered: <span id="buffered_other">0</span> (<span id="bufferedSeconds_other">0</span>)</div>
+        </div>
+
+        <div id="load_url_div">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="URL" name="url" value="" id="url_field">
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="button" id="submit_url">Load</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="get_subs">
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Name</span>
+                    </div>
+                    <input type="text" autocomplete='on' class="form-control" id="title_field">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Season</span>
+                    </div>
+                    <input type="number" class="form-control" id="season_field">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Episode</span>
+                    </div>
+                    <input type="number" class="form-control" id="episode_field">
+                </div>
+                <button type="submit" class="btn btn-primary" id="load_subs">Load Subtitles</button>
+            </div>
+        </div>
+
+        <div id="subtitle_list"></div>
+    </div>
 </body>
-
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -92,7 +93,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="functions.js"></script>
 <script src="https://vjs.zencdn.net/7.0.3/video.js"></script>
-
-
 
 </html>
