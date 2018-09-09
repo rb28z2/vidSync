@@ -73,15 +73,7 @@ io.on('connection', function(socket)
 
   socket.on('new_url', function(data)
   {
-    videoObject = `<div id="video">
-    	<video id="my-video" class="video-js" data-setup='{"controls": true, "autoplay": false, "preload": "auto", "fluid": true}'>
-    	  <source src="${data}" type="video/mp4" />
-        <track src="subs.vtt" kind="captions" srclang="en" label="English" default>
-    	  <p class="vjs-no-js">
-    		Please enable JS
-    	  </p>
-    	</video>
-    </div>`
+    videoObject = get_video_object(data)
     io.sockets.emit('new_url', videoObject);
     last_url = data; // save last played video
   });
@@ -116,6 +108,11 @@ io.on('connection', function(socket)
     console.log("Conversion complete\n");
   })
 
+  socket.on('get_last_video', function(){
+    videoObject = get_video_object(last_url)
+    io.sockets.emit('new_url', videoObject);
+  })
+
   socket.on("updateTime", function(data)
   {
     playData[socket.id] = data;
@@ -145,4 +142,19 @@ function checkSync()
   {
     smallestPlayed = playData[clients[i]];
   }
+}
+
+function get_video_object(data)
+{
+  videoObject = `<div id="video">
+    <video id="my-video" class="video-js" data-setup='{"controls": true, "autoplay": false, "preload": "auto", "fluid": true}'>
+      <source src="${data}" type="video/mp4" />
+      <track src="subs.vtt" kind="captions" srclang="en" label="English" default>
+      <p class="vjs-no-js">
+      Please enable JS
+      </p>
+    </video>
+  </div>`
+
+  return videoObject;
 }

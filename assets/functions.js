@@ -1,3 +1,8 @@
+/**
+* socket.emit('something') emits back to the Server
+* io.sockets.emit('something') emits to all clients
+*/
+
 var socket = io();
 
 console.log("Starting");
@@ -50,6 +55,10 @@ $(document).ready(function() {
     var sub_index = $(this).data().index;
     socket.emit('selected_subtitle', sub_index);
     $(this).css({"background": "#272727", "color": "#565656"});
+  })
+
+  $("#load_last_video").on('click', function() {
+    socket.emit('get_last_video');
   })
 });
 
