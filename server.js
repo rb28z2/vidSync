@@ -110,7 +110,7 @@ io.on('connection', function(socket)
 
   socket.on('get_last_video', function(){
     videoObject = get_video_object(last_url)
-    io.sockets.emit('new_url', videoObject);
+    socket.emit('new_url', videoObject);
   })
 
   socket.on("updateTime", function(data)
