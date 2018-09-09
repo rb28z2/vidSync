@@ -38,8 +38,8 @@ $(document).ready(function() {
     };
 
     socket.emit("subtitle_request", request);
-    $("#load_subs").val("Getting options...");
-    $("#load_subs").attr("disabled", true);
+    $("#load_subs").html("Getting options...");
+    $("#load_subs").prop("disabled", true);
   })
 
   $("#video-container").resizable({
@@ -93,8 +93,8 @@ socket.on('connect', function()
       var appended = listingDiv.append(toAppend).children().last();
       appended.data("index", i);
     }
-    $("#load_subs").val("Load Subtitles");
-    $("#load_subs").attr("disabled", false);
+    $("#load_subs").html("Load Subtitles");
+    $("#load_subs").prop("disabled", false);
   })
 
   socket.on('partner_update', function(data){

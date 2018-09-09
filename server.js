@@ -29,6 +29,7 @@ var playData = {};
 var is_playing = false;
 var syncObj;
 var subtitles_list;
+var last_url;
 
 io.on('connection', function(socket)
 {
@@ -82,6 +83,7 @@ io.on('connection', function(socket)
     	</video>
     </div>`
     io.sockets.emit('new_url', videoObject);
+    last_url = data; // save last played video
   });
 
   socket.on('subtitle_request', function(data){

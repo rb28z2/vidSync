@@ -5,6 +5,7 @@
   <link href="https://vjs.zencdn.net/7.0.3/video-js.css" rel="stylesheet">
   <title>Video Sync</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -17,6 +18,11 @@
   <div>Progress: <span id="currentTime">0</span> / <span class="duration">0</span> (<span id="progressPercent">0</span>)</div>
   <div>Buffered: <span id="buffered">0</span> (<span id="bufferedSeconds">0</span>)</div>
 </div>
+<div id="load_last_div">
+  <div>
+    <button type="button" class="btn btn-primary">Load Last Video</button>
+  </div>
+</div>
 <div id="video_details_other" class="video_details">Not me:
   <div>Progress: <span id="currentTime_other">0</span> / <span class="duration">0</span> (<span id="progressPercent_other">0</span>)</div>
   <div>Buffered: <span id="buffered_other">0</span> (<span id="bufferedSeconds_other">0</span>)</div>
@@ -24,20 +30,22 @@
 <p>
   <form action="" id="url_form">
     <input type="text" name="url" value="" id="url_field">
-    <input type="submit" value="Load" id="submit_url">
+    <button type="submit" class="btn btn-primary" id="submit_url">Load</button>
   </form>
 </p>
 
 <div id="getSubs">
   <form action="" id="subtitle_form">
+    <div class="form-group">
     Name: <input type="text", name="title", value="", id="title_field"><br />
     Season: <input type="number", name="season", value="", id="season_field"><br />
     Episode: <input type="number", name="episode", value="", id="episode_field"><br />
-    <input type="submit", value="Load Subtitles", id="load_subs">
+    <button type="submit" class="btn btn-primary" id="load_subs">Load Subtitles</button>
+  </div>
 </form>
 </div>
 <div id="subtitle_list">
-  
+
 </div>
 </body>
 
@@ -48,5 +56,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="functions.js"></script>
 <script src="https://vjs.zencdn.net/7.0.3/video.js"></script>
+
+
 
 </html>
