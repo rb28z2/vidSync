@@ -1,30 +1,27 @@
 /**
-* socket.emit('something') emits back to the Server
-* io.sockets.emit('something') emits to all clients
-*/
+ * socket.emit('something') emits back to the Server
+ * io.sockets.emit('something') emits to all clients
+ */
 
 var socket = io();
 
 console.log("Starting");
 
-$.getJSON('http://ip4.seeip.org/json', function(data)
-{
+$.getJSON('http://ip4.seeip.org/json', function(data) {
   console.log("My IP:", data.ip);
   socket.emit("browser-connect", data.ip);
 })
 
 //socket.emit('browser', "This is browser");
 
-function updateTime()
-{
+function updateTime() {
   socket.emit("updateTime", player.currentTime());
 }
 
 var player;
 var intervalObj;
 $(document).ready(function() {
-  $("#url_form").submit(function(event)
-  {
+  $("#url_form").submit(function(event) {
     event.preventDefault();
     console.log("submitted");
     url = $("#url_field").val();
@@ -32,14 +29,14 @@ $(document).ready(function() {
     console.log(url);
   });
 
-  $("#subtitle_form").submit(function(event){
+  $("#subtitle_form").submit(function(event) {
     event.preventDefault();
     console.log("Requesting new subtitles");
 
     request = {
       title: $("#title_field").val(),
       season: $("#season_field").val(),
-      episode:  $("#episode_field").val()
+      episode: $("#episode_field").val()
     };
 
     socket.emit("subtitle_request", request);
@@ -48,7 +45,7 @@ $(document).ready(function() {
   })
 
   $("#video-container").resizable({
-    aspectRatio: 16/9
+    aspectRatio: 16 / 9
   })
 
   $("#get_current_time").on('click', function() {
@@ -56,16 +53,19 @@ $(document).ready(function() {
     $("#current_time_input").val(time);
   });
 
-  $("#sync_now").on('click', function(){
+  $("#sync_now").on('click', function() {
     player.pause();
     var time = $("#current_time_input").val();
     socket.emit('jump_to_time', time);
   });
 
-  $("#subtitle_list").on('click', "div.subtitle_item", function(){
+  $("#subtitle_list").on('click', "div.subtitle_item", function() {
     var sub_index = $(this).data().index;
     socket.emit('selected_subtitle', sub_index);
-    $(this).css({"background": "#272727", "color": "#565656"});
+    $(this).css({
+      "background": "#272727",
+      "color": "#565656"
+    });
   })
 
   $("#load_last_video").on('click', function() {
@@ -73,24 +73,18 @@ $(document).ready(function() {
   })
 });
 
-socket.on('connect', function()
-{
+socket.on('connect', function() {
   console.log("Connected!");
 
-  socket.on("play_state", function(data)
-  {
-    if (data == "play")
-    {
+  socket.on("play_state", function(data) {
+    if (data == "play") {
       player.play();
-    }
-    else if (data == "pause")
-    {
+    } else if (data == "pause") {
       player.pause();
     }
   });
 
-  socket.on('new_url', function(data)
-  {
+  socket.on('new_url', function(data) {
     console.log("New URL Recieved: %s", data);
     vid_div = $("#video-container");
     vid_div.html(data);
@@ -102,15 +96,15 @@ socket.on('connect', function()
     playerPause();
   });
 
-  socket.on('jump_to_time', function(data){
+  socket.on('jump_to_time', function(data) {
     console.log("Jumping to time %s", data);
     player.currentTime(data);
   })
 
-  socket.on('subtitle_listing', function(data){
+  socket.on('subtitle_listing', function(data) {
     console.log("Retrieved Subtitles");
     var listingDiv = $("#subtitle_list");
-    for (var i = 0; i < data.length; i++){
+    for (var i = 0; i < data.length; i++) {
       var toAppend = `<div id="subtitle${i}" class="subtitle_item">${data[i].filename}</div>`
       //toAppend.data("index", i);
       console.log(toAppend);
@@ -122,23 +116,24 @@ socket.on('connect', function()
     $("#load_subs").prop("disabled", false);
   })
 
-  socket.on('partner_update', function(data){
-	  $('#currentTime_other').text(data.current_time + "s");
-	  $('#progressPercent_other').text(data.progress_percent + "%")
-	  $('#buffered_other').text(data.buffered_percent + "%");
-	  $('#bufferedSeconds_other').text(data.buffered_seconds + "s");
+  socket.on('partner_update', function(data) {
+    $('#currentTime_other').text(data.current_time + "s");
+    $('#progressPercent_other').text(data.progress_percent + "%")
+    $('#buffered_other').text(data.buffered_percent + "%");
+    $('#bufferedSeconds_other').text(data.buffered_seconds + "s");
   });
 });
 
-function playerReady(){
-  player.ready(function(){
+function playerReady() {
+  player.ready(function() {
     socket.emit('browser', "PLAYER READY");
     console.log(player.bufferedPercent());
     setInterval(updateBufferedPercent, 1000);
   });
 }
-function playerPlay(){
-  player.on("play", function(){
+
+function playerPlay() {
+  player.on("play", function() {
     console.log('Playing');
     socket.emit('play_state_change', 'play');
     var duration_set = false;
@@ -146,8 +141,8 @@ function playerPlay(){
   });
 }
 
-function playerPause(){
-  player.on("pause", function(){
+function playerPause() {
+  player.on("pause", function() {
     socket.emit('play_state_change', 'pause');
     clearInterval(intervalObj);
   });
@@ -155,8 +150,8 @@ function playerPause(){
 
 function updateBufferedPercent(duration_set) // TODO: rename to something more generic
 {
-  buffered_percent = (player.bufferedPercent()*100).toFixed(2);
-  $('#buffered').text( buffered_percent + "%");
+  buffered_percent = (player.bufferedPercent() * 100).toFixed(2);
+  $('#buffered').text(buffered_percent + "%");
 
   buffered_seconds = player.bufferedEnd().toFixed(0)
   $('#bufferedSeconds').text(buffered_seconds + "s");
@@ -164,16 +159,19 @@ function updateBufferedPercent(duration_set) // TODO: rename to something more g
   current_time = player.currentTime().toFixed(0);
   $('#currentTime').text(current_time + "s");
 
-  progress = ((player.currentTime() / player.duration())*100).toFixed(2);
+  progress = ((player.currentTime() / player.duration()) * 100).toFixed(2);
   $('#progressPercent').text(progress + "%");
-  if (!duration_set)
-  {
+  if (!duration_set) {
     $('.duration').text(player.duration().toFixed(0))
     duration_set = true;
   }
 
-  progress_data = {buffered_percent: buffered_percent, buffered_seconds: buffered_seconds, current_time: current_time,
-  progress_percent: progress};
+  progress_data = {
+    buffered_percent: buffered_percent,
+    buffered_seconds: buffered_seconds,
+    current_time: current_time,
+    progress_percent: progress
+  };
 
   socket.emit('partner_update_push', progress_data);
 }
