@@ -1,5 +1,5 @@
 var express = require('express');
-var download = require('download-file');
+var download = require('download');
 var srt2vtt = require('srt-to-vtt')
 var fs = require('fs');
 
@@ -97,20 +97,21 @@ io.on('connection', function(socket)
   socket.on('selected_subtitle', function(data){
     var selected = subtitles_list[data];
     var url = selected.url;
-    var options = {
-      directory: "./assets/",
-      filename: "subs.srt"
-    };
+    console.log("\nSubtitle url: %s", url);
 
-    download(url, options, function(err){
-      if (err) throw err;
-    })
-    console.log("Downloaded %s successfully as %s in %s", data.filename, options.filename, options.directory);
+    const subtitle_path = __dirname + '/assets/subs.srt'
+    if (fs.existsSync(subtitle_path)){
+      fs.unlinkSync(subtitle_path); // remove old subtitle
+    }
+
+    download(url).pipe(fs.createWriteStream(subtitle_path));
+
+    console.log("Downloaded %s successfully as %s in %s", data.filename, "subs.srt", __dirname + "/assets/");
     console.log("Converting to VTT");
-    fs.createReadStream('./assets/subs.srt')
+    fs.createReadStream(subtitle_path)
       .pipe(srt2vtt())
-      .pipe(fs.createWriteStream('./assets/subs.vtt'));
-    console.log("Conversion complete");
+      .pipe(fs.createWriteStream(__dirname + '/assets/subs.vtt'));
+    console.log("Conversion complete\n");
   })
 
   socket.on("updateTime", function(data)
