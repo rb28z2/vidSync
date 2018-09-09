@@ -56,6 +56,7 @@ $(document).ready(function() {
     player.pause();
     var time = $("#current_time_input").val();
     socket.emit('jump_to_time', time);
+    $("#sync_badge").fadeIn().delay(3000).fadeOut();
   });
 
   $("#subtitle_list").on('click', "div.subtitle_item", function() {
@@ -85,6 +86,7 @@ socket.on('connect', function() {
 
   socket.on('new_url', function(data) {
     console.log("New URL Recieved: %s", data);
+    $("#primary_alert").html("Loaded new video").slideDown().delay(3000).slideUp();
     vid_div = $("#video-container");
     vid_div.html(data);
     player = videojs('my-video');

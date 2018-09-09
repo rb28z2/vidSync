@@ -3,6 +3,10 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+#primary_alert {
+  display: none;
+}
+
 #hello {
   color: gray;
   margin-bottom: 10px;
@@ -29,11 +33,25 @@ body {
 
 #video_controls {
   width: 25%;
+  height: 1rem;
+  margin-bottom: 3rem;
+}
+
+#load_last_video {
+  float: left;
+  margin-right: 15px;
 }
 
 #sync_block {
-  float: right;
+  float: left;
   width: 50%;
+  margin-right: 15px;
+}
+
+#sync_badge {
+  float: left;
+  margin-top: 0.5rem;
+  display: none;
 }
 
 .video_details {

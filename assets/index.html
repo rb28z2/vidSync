@@ -11,6 +11,11 @@
 
 <body>
   <div id="outer_container">
+
+    <div class="alert alert-info" role="alert" id="primary_alert">
+      A simple primary alert—check it out!
+    </div>
+
     <div id="hello">Hello! List of things that are broken: yes</div>
     <div id="video-container" class="ui-widget-container"></div>
     <div id="video_details_me" class="video_details">Me:
@@ -19,9 +24,9 @@
     </div>
     <div id="video_controls">
 
-      <span>
+      <div>
       <button type="button" class="btn btn-primary" id="load_last_video">Load Last Video</button>
-    </span>
+    </div>
 
       <div class="input-group mb-3" id="sync_block">
         <div class="input-group-prepend">
@@ -31,8 +36,9 @@
         <div class="input-group-append">
           <button class="btn btn-success" type="button" id="sync_now">Sync</button>
         </div>
-      </div>
 
+      </div>
+  <div class="badge badge-secondary" id="sync_badge">Synced!</div>
     </div>
 
     <div id="video_details_other" class="video_details">Not me:
