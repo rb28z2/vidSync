@@ -25,39 +25,57 @@
 
       <div class="input-group mb-3" id="sync_block">
         <div class="input-group-prepend">
-          <button class="btn btn-outline-secondary" type="button" id="get_current_time">Now</button>
+          <button class="btn btn-outline-info" type="button" id="get_current_time">Now</button>
         </div>
         <input type="number" class="form-control" placeholder="" id="current_time_input">
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" id="sync_now">Sync</button>
+          <button class="btn btn-success" type="button" id="sync_now">Sync</button>
         </div>
       </div>
 
     </div>
+
     <div id="video_details_other" class="video_details">Not me:
       <div>Progress: <span id="currentTime_other">0</span> / <span class="duration">0</span> (<span id="progressPercent_other">0</span>)</div>
       <div>Buffered: <span id="buffered_other">0</span> (<span id="bufferedSeconds_other">0</span>)</div>
     </div>
-    <p>
-      <form action="" id="url_form">
-        <input type="text" name="url" value="" id="url_field">
-        <button type="submit" class="btn btn-primary" id="submit_url">Load</button>
-      </form>
-    </p>
 
-    <div id="getSubs">
-      <form action="" id="subtitle_form">
+    <div id="load_url_div">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="URL" name="url" value="" id="url_field">
+        <div class="input-group-append">
+          <button class="btn btn-success" type="button" id="submit_url">Load</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="get_subs">
         <div class="form-group">
-          Name: <input type="text", name="title", value="", id="title_field"><br />
-    Season: <input type="number", name="season", value="", id="season_field"><br />
-    Episode: <input type="number", name="episode", value="", id="episode_field"><br />
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Name</span>
+            </div>
+            <input type="text" class="form-control" id="title_field">
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Season</span>
+            </div>
+            <input type="number" class="form-control" id="season_field">
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Episode</span>
+            </div>
+            <input type="number" class="form-control" id="episode_field">
+          </div>
           <button type="submit" class="btn btn-primary" id="load_subs">Load Subtitles</button>
         </div>
-      </form>
     </div>
-    <div id="subtitle_list">
 
-    </div>
+    <div id="subtitle_list"></div>
   </div>
 </body>
 

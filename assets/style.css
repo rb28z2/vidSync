@@ -8,6 +8,10 @@ body {
   margin-bottom: 10px;
 }
 
+#outer_container {
+  padding: 10px;
+}
+
 #video-container {
   padding: 10px;
   width: 85%;
@@ -24,12 +28,12 @@ body {
 }
 
 #video_controls {
-  width: 30%;
+  width: 25%;
 }
 
 #sync_block {
   float: right;
-  width: 37%;
+  width: 50%;
 }
 
 .video_details {
@@ -37,20 +41,18 @@ body {
   margin-top: 15px;
 }
 
+#load_url_div {
+  width: 30%;
+  margin-top: 1rem;
+}
+
 #video_details_me {
   display: none;
 }
 
-#episode_field {
-  width: 50px
-}
-
-#season_field {
-  width: 50px
-}
-
-#subtitle_form {
-  color: #bbbbbb
+#get_subs {
+  margin-bottom: 1rem;
+  width: 295px;
 }
 
 #subtitle_list {

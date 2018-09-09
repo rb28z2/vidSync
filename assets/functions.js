@@ -21,16 +21,15 @@ function updateTime() {
 var player;
 var intervalObj;
 $(document).ready(function() {
-  $("#url_form").submit(function(event) {
-    event.preventDefault();
+
+  $("#submit_url").on('click', function(event){
     console.log("submitted");
     url = $("#url_field").val();
     socket.emit("new_url", url);
     console.log(url);
   });
 
-  $("#subtitle_form").submit(function(event) {
-    event.preventDefault();
+  $("#load_subs").on('click', function(event){
     console.log("Requesting new subtitles");
 
     request = {
