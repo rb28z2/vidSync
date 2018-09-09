@@ -22,14 +22,14 @@ var player;
 var intervalObj;
 $(document).ready(function() {
 
-  $("#submit_url").on('click', function(event){
+  $("#submit_url").on('click', function(){
     console.log("submitted");
     url = $("#url_field").val();
     socket.emit("new_url", url);
     console.log(url);
   });
 
-  $("#load_subs").on('click', function(event){
+  $("#load_subs").on('click', function(){
     console.log("Requesting new subtitles");
 
     request = {

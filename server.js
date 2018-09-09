@@ -127,7 +127,7 @@ io.on('connection', function(socket)
   })
 
 
-  socket.on('disconnect', function(socket){
+  socket.on('disconnect', function(_socket){
     //socket.broadcast.emit("play_state", "pause");
   })
 });
@@ -144,7 +144,7 @@ function checkSync()
   var clients = Object.keys(io.sockets.sockets);
   for (var i = 0; i < playData.length; i++)
   {
-    smallestPlayed = playData[clients[i]];
+    _smallestPlayed = playData[clients[i]];
   }
 }
 
