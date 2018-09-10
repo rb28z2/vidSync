@@ -61,11 +61,14 @@ $(document).ready(function() {
 
   $("#subtitle_enable").change(function() {
     checked = $(this).is(':checked');
-    if (checked) {
-      player.textTracks()[0].mode = 'showing';
-    }
-    else {
-      player.textTracks()[0].mode = 'hidden';
+    if (player != undefined)
+    {
+      if (checked) {
+        player.textTracks()[0].mode = 'showing';
+      }
+      else {
+        player.textTracks()[0].mode = 'hidden';
+      }
     }
   })
 
