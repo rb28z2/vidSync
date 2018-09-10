@@ -63,12 +63,7 @@ $(document).ready(function() {
     checked = $(this).is(':checked');
     if (player != undefined)
     {
-      if (checked) {
-        player.textTracks()[0].mode = 'showing';
-      }
-      else {
-        player.textTracks()[0].mode = 'hidden';
-      }
+      player.textTracks()[0].mode = checked ? 'showing' : 'hidden';
     }
   })
 
