@@ -86,7 +86,7 @@ socket.on('connect', function() {
 
   socket.on('new_url', function(data) {
     console.log("New URL Recieved: %s", data);
-    $("#primary_alert").html("Loaded new video").slideDown().delay(3000).slideUp();
+    $("#new_url_badge").fadeIn().delay(3000).fadeOut();
     vid_div = $("#video-container");
     vid_div.html(data);
     player = videojs('my-video');

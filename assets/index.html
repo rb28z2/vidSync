@@ -12,14 +12,10 @@
 <body>
     <div id="outer_container">
 
-        <div class="alert alert-info" role="alert" id="primary_alert">
-            A simple primary alert—check it out!
-        </div>
-
         <div id="hello">Hello! List of things that are broken: yes</div>
 
         <div id="video-container" class="ui-widget-container"></div>
-        
+
         <div id="video_details_me" class="video_details">Me:
             <div>Progress: <span id="currentTime">0</span> / <span class="duration">0</span> (<span id="progressPercent">0</span>)</div>
             <div>Buffered: <span id="buffered">0</span> (<span id="bufferedSeconds">0</span>)</div>
@@ -49,12 +45,13 @@
         </div>
 
         <div id="load_url_div">
-            <div class="input-group mb-3">
+            <div class="input-group mb-3" id="url_block">
                 <input type="text" class="form-control" placeholder="URL" name="url" value="" id="url_field">
                 <div class="input-group-append">
                     <button class="btn btn-success" type="button" id="submit_url">Load</button>
                 </div>
             </div>
+            <div class="badge badge-success" id="new_url_badge">New file Loaded!</div>
         </div>
 
         <div id="get_subs">
