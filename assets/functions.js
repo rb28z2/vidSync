@@ -56,8 +56,18 @@ $(document).ready(function() {
     player.pause();
     var time = $("#current_time_input").val();
     socket.emit('jump_to_time', time);
-    $("#sync_badge").fadeIn().delay(3000).fadeOut();
+    $("#sync_badge").fadeTo(1000, 1).delay(3000).fadeTo(1000, 0);
   });
+
+  $("#subtitle_enable").change(function() {
+    checked = $(this).is(':checked');
+    if (checked) {
+      player.textTracks()[0].mode = 'showing';
+    }
+    else {
+      player.textTracks()[0].mode = 'hidden';
+    }
+  })
 
   $("#subtitle_list").on('click', "div.subtitle_item", function() {
     var sub_index = $(this).data().index;

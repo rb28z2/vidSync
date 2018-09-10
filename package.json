@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Sync Video",
   "dependencies": {
-    "download": "^7.1.0",
+    "download-file-sync": "^1.0.4",
     "express": "^4.16.3",
     "opensubtitles-api": "^4.1.0",
     "socketio": "^1.0.0",

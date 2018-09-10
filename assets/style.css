@@ -28,7 +28,7 @@ body {
 }
 
 #video_controls {
-  width: 25%;
+  width: 35%;
   height: 1rem;
   margin-bottom: 3rem;
 }
@@ -40,14 +40,25 @@ body {
 
 #sync_block {
   float: left;
-  width: 50%;
+  width: 25%;
   margin-right: 15px;
 }
 
 #sync_badge {
   float: left;
   margin-top: 0.5rem;
-  display: none;
+  display: block;
+  opacity: 0;
+  margin-right: 15px;
+}
+
+#subtitle_enable_block {
+  float: left;
+  margin-top: 0.4rem;
+}
+
+#subtitle_enable_text {
+  color: #bbbbbb;
 }
 
 .video_details {
