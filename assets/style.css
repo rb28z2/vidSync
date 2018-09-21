@@ -28,7 +28,6 @@ body {
 }
 
 #video_controls {
-  width: 35%;
   height: 1rem;
   margin-bottom: 3rem;
 }
@@ -67,7 +66,7 @@ body {
 }
 
 #load_url_div {
-  width: 30%;
+  width: 45%;
   margin-top: 1rem;
   height: 1rem;
 }
