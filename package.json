@@ -4,7 +4,7 @@
   "description": "Sync Video",
   "dependencies": {
     "download-file-sync": "^1.0.4",
-    "express": "^4.16.4",
+    "express": "^4.17.0",
     "opensubtitles-api": "^5.0.0",
     "socketio": "^1.0.0",
     "srt-to-vtt": "^1.1.3"
