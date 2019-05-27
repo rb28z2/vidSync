@@ -5,7 +5,7 @@
   "dependencies": {
     "download-file-sync": "^1.0.4",
     "express": "^4.17.1",
-    "opensubtitles-api": "^5.0.0",
+    "opensubtitles-api": "^5.0.1",
     "socketio": "^1.0.0",
     "srt-to-vtt": "^1.1.3"
   }
